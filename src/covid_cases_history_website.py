@@ -95,10 +95,13 @@ def check_for_covid_cases_updates():
         interstate_acquired_cases = soup.select_one('#interstate > ul > li:nth-child(1) > span.number').text.strip()
         overseas_acquired_cases = soup.select_one('#overseas > ul > li:nth-child(1) > span.number').text.strip()
         total_cases = soup.select_one('#case > ul > li:nth-child(1) > span.number').text.strip()
-        active_cases_local = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div > div.active-cases.calloutbox > ul > li:nth-child(1) > span').text.strip()
-        active_cases_interstate = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div > div.active-cases.calloutbox > ul > li:nth-child(2) > span').text.strip()
-        active_cases_overseas = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div > div.active-cases.calloutbox > ul > li:nth-child(3) > span').text.strip()
+        
+        active_cases_local = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div').select_one('div.active-cases.calloutbox').select('.number')[0].text.strip()
+        active_cases_interstate = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div').select_one('div.active-cases.calloutbox').select('.number')[1].text.strip()
+        active_cases_overseas = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div').select_one('div.active-cases.calloutbox').select('.number')[2].text.strip()
+        
         total_tests = soup.select_one('#testing > ul > li:nth-child(1) > span.number').text.strip()
+        
         vaccination_first_dose = soup.select_one('#ContentHtml1Zone2 > div:nth-child(3) > div > table > tbody > tr:nth-child(2) > td:nth-child(2)').text.strip()
         vaccination_second_dose = soup.select_one('#ContentHtml1Zone2 > div:nth-child(3) > div > table > tbody > tr:nth-child(3) > td:nth-child(2)').text.strip()
         vaccination_total = soup.select_one('#ContentHtml1Zone2 > div:nth-child(3) > div > table > tbody > tr:nth-child(4) > td:nth-child(2)').text.strip()
