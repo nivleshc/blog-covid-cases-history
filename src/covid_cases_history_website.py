@@ -100,7 +100,10 @@ def check_for_covid_cases_updates():
         active_cases_interstate = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div').select_one('div.active-cases.calloutbox').select('.number')[1].text.strip()
         active_cases_overseas = soup.select_one('#ContentHtml1Zone2 > div:nth-child(1) > div').select_one('div.active-cases.calloutbox').select('.number')[2].text.strip()
         
-        total_tests = soup.select_one('#testing > ul > li:nth-child(1) > span.number').text.strip()
+        try:
+            total_tests = soup.select_one('#testing > ul > li:nth-child(1) > span.number').text.strip()
+        except:
+            total_tests = 'unavailable'
         
         vaccination_first_dose = soup.select_one('#ContentHtml1Zone2 > div:nth-child(3) > div > table > tbody > tr:nth-child(2) > td:nth-child(2)').text.strip()
         vaccination_second_dose = soup.select_one('#ContentHtml1Zone2 > div:nth-child(3) > div > table > tbody > tr:nth-child(3) > td:nth-child(2)').text.strip()
